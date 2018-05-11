@@ -305,7 +305,7 @@ func DescribeInstancesUnpaginated(svcec2 *ec2.EC2, instanceIds []string) ([]*ec2
 		if err != nil {
 			return nil, err
 		}
-		log.Printf("Described %d EC2 reservations", len(output.Reservations))
+
 		finalOutput.Reservations = append(finalOutput.Reservations, output.Reservations...)
 		if output.NextToken == nil {
 			break
@@ -418,7 +418,7 @@ func GetTasksOfClusters(svc *ecs.ECS, svcec2 *ec2.EC2, clusterArns []*string) ([
 					if len(output.TaskArns) == 0 {
 						break
 					}
-					log.Printf("Inspected cluster %s, found %d tasks", *clusterArn, len(output.TaskArns))
+
 					descOutput, err2 := svc.DescribeTasks(&ecs.DescribeTasksInput{
 						Cluster: clusterArn,
 						Tasks:   output.TaskArns,
@@ -428,7 +428,7 @@ func GetTasksOfClusters(svc *ecs.ECS, svcec2 *ec2.EC2, clusterArns []*string) ([
 						log.Printf("Error describing tasks of cluster %s: %s", *clusterArn, err)
 						break
 					}
-					log.Printf("Described %d tasks in cluster %s", len(descOutput.Tasks), *clusterArn)
+
 					if len(descOutput.Failures) > 0 {
 						log.Printf("Described %d failures in cluster %s", len(descOutput.Failures), *clusterArn)
 					}
@@ -518,7 +518,7 @@ func main() {
 			logError(err)
 			return
 		}
-		log.Printf("Writing %d discovered exporters to %s", len(infos), *outFile)
+		// log.Printf("Writing %d discovered exporters to %s", len(infos), *outFile)
 		err = ioutil.WriteFile(*outFile, m, 0644)
 		if err != nil {
 			logError(err)
