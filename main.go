@@ -212,14 +212,14 @@ func (t *AugmentedTask) ExporterInformation() []*PrometheusTaskInfo {
 
 		labels := yaml.MapSlice{}
 		labels = append(labels,
-			yaml.MapItem{"task_arn", *t.TaskArn},
-			yaml.MapItem{"task_name", *t.TaskDefinition.Family},
-			yaml.MapItem{"task_revision", fmt.Sprintf("%d", *t.TaskDefinition.Revision)},
-			yaml.MapItem{"task_group", *t.Group},
-			yaml.MapItem{"cluster_arn", *t.ClusterArn},
+			// yaml.MapItem{"task_arn", *t.TaskArn},
+			// yaml.MapItem{"task_name", *t.TaskDefinition.Family},
+			// yaml.MapItem{"task_revision", fmt.Sprintf("%d", *t.TaskDefinition.Revision)},
+			// yaml.MapItem{"task_group", *t.Group},
+			// yaml.MapItem{"cluster_arn", *t.ClusterArn},
 			yaml.MapItem{"container_name", *i.Name},
-			yaml.MapItem{"container_arn", *i.ContainerArn},
-			yaml.MapItem{"docker_image", *d.Image},
+			// yaml.MapItem{"container_arn", *i.ContainerArn},
+			// yaml.MapItem{"docker_image", *d.Image},
 		)
 		ret = append(ret, &PrometheusTaskInfo{
 			Targets: []string{fmt.Sprintf("%s:%d", host, hostPort)},
